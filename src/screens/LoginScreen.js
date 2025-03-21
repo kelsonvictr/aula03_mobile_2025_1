@@ -3,7 +3,7 @@ import React from 'react'
 import { useState } from 'react'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -28,7 +28,7 @@ const LoginScreen = () => {
         onChangeText={setPassword}
        />
 
-       <Button title="Entrar" />
+       <Button title="Entrar" onPress={() => navigation.replace('Main') } />
 
        <Text style={styles.orText}>Ou entre com</Text>
 

@@ -5,6 +5,7 @@ import React from 'react'
 import HomeScreen from '../screens/HomeScreen'
 import DetailsScreen from '../screens/DetailsScreen'
 import LoginScreen2 from '../screens/LoginScreen'
+import ProfileScreen from '../screens/ProfileScreen'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -16,6 +17,11 @@ const MainTabs = () => {
               name="Home"
               component={HomeScreen}
               options={{ tabBarIcon: ({ color, size }) => <Ionicons name="home-outline" size={size} color={color} /> }}
+            />
+            <Tab.Screen
+              name="Profile"
+              component={ProfileScreen}
+              options={{ tabBarIcon: ({ color, size}) => <Ionicons name="person-outline" size={size} color={color} /> }}
             />
         </Tab.Navigator>
     )

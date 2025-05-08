@@ -1,6 +1,8 @@
-import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
-import { getDoc } from 'firebase/firestore'
+import { View, Text, Alert, TextInput, Button, StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { getDoc, doc } from 'firebase/firestore'
+import { adicionarCurso, atualizarCurso } from '../services/CursoService'
+import { db } from '../config/firebaseConfig'
 
 const CursoFormScreen = ({ route, navigation  }) => {
 
@@ -24,9 +26,47 @@ const CursoFormScreen = ({ route, navigation  }) => {
         }
     }, [itemId])
 
+    const handleSalvar = async () => {
+      if ( !nome || !descricao ) {
+        Alert.alert('Erro', 'Preencha todos os campos!')
+        return
+      }
+
+      try {
+        if (editando) {
+          await atualizarCurso(itemId, { name: nome, description: descricao })
+          Alert.alert('Curso atualizado com sucesso!')
+        } else {
+          await adicionarCurso({ name: nome, description: descricao })
+          Alert.alert('Curso criado com sucesso!')
+        }
+        navigation.goBack()
+      } catch (error) {
+        Alert.alert('Erro', 'Algo deu errado ao salvar!')
+      }
+    }
+
   return (
-    <View>
-      <Text>CursoFormScreen</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>
+        {editando ? 'Editar Curso' : 'Adicionar Curso'}
+        </Text>
+
+      <TextInput
+        placeholder="Nome do curso"
+        style={styles.input}
+        value={nome}
+        onChangeText={setNome}
+      />
+
+      <TextInput
+        placeholder="Descrição do curso"
+        style={styles.input}
+        value={descricao}
+        onChangeText={setDescricao}
+      />
+
+      <Button title={editando ? 'Salvar Alterações' : 'Criar Curso'} onPress={handleSalvar} />
     </View>
   )
 }

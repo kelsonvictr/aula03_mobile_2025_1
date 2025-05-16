@@ -7,6 +7,7 @@ import DetailsScreen from '../screens/DetailsScreen'
 import LoginScreen2 from '../screens/LoginScreen'
 import ProfileScreen from '../screens/ProfileScreen'
 import CursoFormScreen from '../screens/CursoFormScreen'
+import RegisterScreen from '../screens/RegisterScreen'
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -36,6 +37,7 @@ const AppNavigation = () => {
         <Stack.Screen name="Main" component={MainTabs} options={{ headerShown: false }} ></Stack.Screen>
         <Stack.Screen name="Details" component={DetailsScreen} ></Stack.Screen>
         <Stack.Screen name="CursoForm" component={CursoFormScreen}></Stack.Screen>
+        <Stack.Screen name="Register" component={RegisterScreen}></Stack.Screen>
     </Stack.Navigator>
   )
 }

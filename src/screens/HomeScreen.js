@@ -1,14 +1,16 @@
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Button, Alert } from 'react-native'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useContext, useState } from 'react'
 import { useFocusEffect } from '@react-navigation/native'
 import { deletarCurso, getCursos } from '../services/CursoService'
+import { AuthContext } from '../context/AuthContext'
 
 const HomeScreen = ({ navigation }) => {
 
   const [items, setItems] = useState([])
+  const { user } = useContext(AuthContext)
 
   const carregarCursos =  async () => {
-    const cursos = await getCursos()
+    const cursos = await getCursos(user.uid)
     setItems(cursos)
   }
 
